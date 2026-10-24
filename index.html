@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff4f6">
+<title>A Little Check-In, Love</title>
+<style>
+:root{--rose:#b85c76;--rose-dark:#91445b;--ink:#503c43;--muted:#8b747c;--paper:#fffdfb;--pink:#fff0f3;--line:#f0dce2;--shadow:0 18px 50px #9e52631a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 5%,#ffe4eb 0,transparent 30%),radial-gradient(circle at 90% 35%,#f9e8ef 0,transparent 28%),#fff9f7;color:var(--ink);font-family:Georgia,"Times New Roman",serif;min-height:100vh}
+button,input,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(760px,100%);margin:auto;padding:28px 18px 48px}.top{text-align:center;padding:20px 10px 18px}.eyebrow{font:600 11px/1.5 Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}h1{font-size:clamp(34px,7vw,52px);font-weight:normal;line-height:1.06;margin:12px 0;color:#754555}.subtitle{font-size:17px;line-height:1.6;color:var(--muted);max-width:470px;margin:0 auto}.heart{font-size:25px;color:#c96c85}.card{background:#ffffffdb;border:1px solid var(--line);border-radius:25px;padding:clamp(19px,4vw,30px);box-shadow:var(--shadow);margin:16px 0}.section-title{font-size:22px;font-weight:normal;margin:0 0 7px}.hint{font:13px/1.5 Arial,sans-serif;color:var(--muted);margin:0 0 17px}.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.choice{border:1px solid var(--line);background:#fffaf9;border-radius:16px;padding:13px 7px;color:var(--ink);transition:.18s;min-height:82px}.choice span{display:block;font:25px Arial,sans-serif;margin-bottom:7px}.choice b{font:13px Arial,sans-serif;font-weight:500}.choice.selected{border-color:var(--rose);background:#fff0f4;box-shadow:0 0 0 2px #b85c7615;color:var(--rose-dark)}.support{grid-template-columns:repeat(2,minmax(0,1fr))}.support .choice{min-height:58px;display:flex;align-items:center;gap:10px;text-align:left;padding:12px}.support .choice span{font-size:22px;margin:0 0 0 4px}.support .choice b{font-size:14px}.field{display:block;font:13px Arial,sans-serif;color:var(--muted);margin:16px 0 8px}textarea,input[type=text]{width:100%;border:1px solid var(--line);background:#fffaf9;border-radius:14px;padding:13px 14px;color:var(--ink);outline:none}textarea{min-height:110px;resize:vertical;line-height:1.5}textarea:focus,input:focus{border-color:#c77b90;box-shadow:0 0 0 3px #c77b9018}.range-row{display:flex;align-items:center;gap:12px}.range-row input{flex:1;accent-color:var(--rose)}.range-value{background:var(--pink);border-radius:12px;padding:8px 12px;color:var(--rose-dark);font:14px Arial,sans-serif}.privacy{font:12px/1.55 Arial,sans-serif;color:var(--muted);background:#fff7f8;border:1px solid var(--line);border-radius:13px;padding:12px 14px;margin:18px 0}.privacy input{accent-color:var(--rose);margin-right:8px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:11px}.primary,.secondary,.need{border-radius:15px;padding:14px 16px;border:1px solid var(--rose);font:600 14px Arial,sans-serif}.primary{background:var(--rose);color:white}.primary:hover{background:var(--rose-dark)}.secondary{background:#fff;color:var(--rose-dark)}.need{display:block;width:100%;margin-bottom:12px;background:#fff0f4;color:#a34c66;border-color:#edcbd5}.status{display:none;margin-top:14px;border-radius:13px;padding:13px;font:14px/1.5 Arial,sans-serif}.status.show{display:block}.status.good{background:#f0f8f0;color:#376b43}.status.bad{background:#fff0f0;color:#9a3030}.foot{text-align:center;color:#a68d95;font:12px Arial,sans-serif;margin-top:24px}.success{display:none;text-align:center;padding:24px 12px}.success.show{display:block}.success .big{font-size:50px}.success h2{font-size:30px;font-weight:normal;color:#754555}.success p{font-size:17px;line-height:1.7;color:var(--muted)}.hidden{display:none!important}.small-note{font:12px/1.5 Arial,sans-serif;color:var(--muted)}@media(max-width:480px){.wrap{padding:16px 12px 34px}.choices{grid-template-columns:repeat(2,minmax(0,1fr))}.support{grid-template-columns:1fr}.choice{min-height:72px}.actions{grid-template-columns:1fr}.top{padding-top:14px}.card{border-radius:20px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+  <div class="heart">♡</div><div class="eyebrow">a tiny moment just for you</div>
+  <h1>How's your heart<br>feeling, love?</h1>
+  <p class="subtitle">No need to pretend you're okay here. Tell me how today feels, and what would help you feel a little more loved. ♡</p>
+</header>
+<form id="checkin">
+<section id="formContent">
+<div class="card">
+  <h2 class="section-title">First, how are you feeling?</h2><p class="hint">Pick the feeling that fits best — or choose a few.</p>
+  <div class="choices" id="moods">
+    <button type="button" class="choice" data-group="mood" data-value="Happy"><span>☀️</span><b>Happy</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Loved"><span>💗</span><b>Loved</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Calm"><span>🌿</span><b>Calm</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Sad"><span>🌧️</span><b>Sad</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Anxious"><span>🫧</span><b>Anxious</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Stressed"><span>🌪️</span><b>Stressed</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Angry"><span>🌶️</span><b>Angry</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Lonely"><span>🌙</span><b>Lonely</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Tired"><span>🧸</span><b>Tired</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Overwhelmed"><span>🌊</span><b>Overwhelmed</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Excited"><span>✨</span><b>Excited</b></button>
+    <button type="button" class="choice" data-group="mood" data-value="Not sure"><span>☁️</span><b>Not sure</b></button>
+  </div>
+  <label class="field" for="day">How has your day been overall?</label>
+  <div class="range-row"><input id="day" type="range" min="1" max="5" value="3"><span id="dayValue" class="range-value">3 / 5</span></div>
+</div>
+<div class="card">
+  <h2 class="section-title">What do you need from me?</h2><p class="hint">It's okay if you need more than one thing.</p>
+  <div class="choices support" id="needs">
+    <button type="button" class="choice" data-group="need" data-value="Comfort"><span>🫂</span><b>A little comfort</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Reassurance"><span>💌</span><b>Reassurance</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Listen, no advice"><span>👂</span><b>Just listen, no advice</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Advice together"><span>🤍</span><b>Help me figure it out</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Call me"><span>📞</span><b>A call with you</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Affection"><span>🩷</span><b>Extra affection</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Space"><span>🪴</span><b>A little space</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Distraction"><span>🍿</span><b>Distract me</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Practical help"><span>🧩</span><b>Practical help</b></button>
+    <button type="button" class="choice" data-group="need" data-value="Surprise me"><span>🎁</span><b>Surprise me</b></button>
+  </div>
+  <label class="field" for="message">Anything you want me to know? (optional)</label>
+  <textarea id="message" maxlength="2000" placeholder="You can tell me what happened, what's on your mind, or leave me a little message..."></textarea>
+  <label class="field" for="name">What should I call you here? (optional)</label>
+  <input id="name" type="text" maxlength="80" placeholder="Your nickname">
+</div>
+<button type="button" class="need" id="needNow">♡ I need you right now</button>
+<div class="privacy"><label><input type="checkbox" id="consent" required>I understand that when I submit, my selected answers and any message I wrote will be sent to my boyfriend and saved in a Google Sheet he manages. I can leave the message blank.</label></div>
+<div class="actions"><button type="submit" class="primary" id="submitBtn">Send my check-in ♡</button><button type="button" class="secondary" id="resetBtn">Start over</button></div>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<p class="small-note">Only share what you're comfortable sharing. This is a check-in, not a test — every feeling is allowed.</p>
+</section>
+<section class="success" id="success" aria-live="polite">
+<div class="big">💗</div><h2>Your check-in is with me, love.</h2>
+<p>Thank you for letting me into your little world today. You don't have to have the right words or be okay all the time. I'm on your side, on the bright days and the difficult ones.</p>
+<p><em>You are loved. Always, in all your moods.</em></p>
+<button type="button" class="secondary" id="againBtn">Do another check-in</button>
+</section>
+</form>
+<footer class="foot">made with love, for your heart ♡</footer>
+</main>
+<script>
+/*
+  SETUP: Replace SCRIPT_URL with your deployed Google Apps Script web app URL.
+  Until configured, this page will NOT send or save responses anywhere.
+*/
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxPTSLmmQoe4ZETmIo5sR5mzZkZIYXzIdBIIaNaQ-zjTFj6-hvDSUGa90tgxyYfII1b/exec";
+const selected = { mood: new Set(), need: new Set() };
+document.querySelectorAll('.choice').forEach(btn => btn.addEventListener('click', () => {
+  const group=btn.dataset.group, value=btn.dataset.value;
+  if(selected[group].has(value)){selected[group].delete(value);btn.classList.remove('selected')}
+  else{selected[group].add(value);btn.classList.add('selected')}
+}));
+const day=document.getElementById('day'), dayValue=document.getElementById('dayValue');
+day.addEventListener('input',()=>dayValue.textContent=day.value+' / 5');
+const statusEl=document.getElementById('status'), submitBtn=document.getElementById('submitBtn');
+function showStatus(message,type){statusEl.textContent=message;statusEl.className='status show '+type}
+function clearSelections(){for(const group of Object.keys(selected))selected[group].clear();document.querySelectorAll('.choice.selected').forEach(x=>x.classList.remove('selected'))}
+function resetForm(){document.getElementById('checkin').reset();clearSelections();dayValue.textContent='3 / 5';statusEl.className='status';document.getElementById('formContent').classList.remove('hidden');document.getElementById('success').classList.remove('show')}
+document.getElementById('resetBtn').addEventListener('click',resetForm);
+document.getElementById('againBtn').addEventListener('click',resetForm);
+document.getElementById('needNow').addEventListener('click',()=>{
+  selected.need.add('I need you right now');
+  document.querySelectorAll('.choice[data-group="need"]').forEach(btn=>{if(btn.dataset.value==='Affection'||btn.dataset.value==='Call me')btn.classList.add('selected')});
+  showStatus('I hear you. Choose any other details you want to share, then send your check-in so I can see it. ♡','good');
+  document.getElementById('consent').focus();
+});
+document.getElementById('checkin').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!document.getElementById('consent').checked){showStatus('Please read and agree to the privacy note before sending.','bad');return}
+ if(SCRIPT_URL.includes('PASTE_YOUR_')){showStatus('This website is not connected yet. The answers have NOT been sent or saved. The owner needs to connect the Google Apps Script URL in this page first.','bad');return}
+ const payload={moods:[...selected.mood],needs:[...selected.need],dayRating:Number(day.value),message:document.getElementById('message').value.trim(),nickname:document.getElementById('name').value.trim(),urgent:selected.need.has('I need you right now'),submittedAt:new Date().toISOString()};
+ submitBtn.disabled=true;submitBtn.textContent='Sending with love…';
+ try{
+   const response=await fetch(SCRIPT_URL,{method:'POST',mode:'cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow'});
+   const result=await response.json();
+   if(!response.ok||!result.success)throw new Error(result.message||'Could not save your check-in.');
+   document.getElementById('formContent').classList.add('hidden');document.getElementById('success').classList.add('show');
+ }catch(err){showStatus('Sorry, your check-in could not be confirmed. Please try again in a moment. Nothing here says it was saved. ('+err.message+')','bad')}
+ finally{submitBtn.disabled=false;submitBtn.textContent='Send my check-in ♡'}
+});
+</script>
+</body>
+</html>
